@@ -1,6 +1,5 @@
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import WalletConnectButton from "./WalletConnectButton";
 
 const LinkStyle = { textDecoration: "none", color: "white" };
 
@@ -34,8 +33,6 @@ const Navigation = () => {
               Dashboard{" "}
             </Link>
           </Nav.Link>
-
-          <WalletConnectButton />
         </Nav>
       </Container>
     </Navbar>
