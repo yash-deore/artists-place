@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/artists-place/static/css/main.e7720ab7.css",
+    "main.js": "/artists-place/static/js/main.6b94d225.js",
+    "index.html": "/artists-place/index.html",
+    "main.e7720ab7.css.map": "/artists-place/static/css/main.e7720ab7.css.map",
+    "main.6b94d225.js.map": "/artists-place/static/js/main.6b94d225.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7720ab7.css",
+    "static/js/main.6b94d225.js"
+  ]
+}
