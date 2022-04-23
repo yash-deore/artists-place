@@ -13,13 +13,13 @@ import {
 const App = () => {
   return (
     <div>
-      <Router>
+      <Router basename="/artists-place">
         {/* Navigation */}
         <Navigation />
 
         {/* Setting the routes */}
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/artists-place" element={<HomePage />} />
           <Route path="/creator-dashboard" element={<CreatorDashboard />} />
           <Route path="/create-nft" element={<CreateNFT />} />
           <Route path="/market-place" element={<MarketPlace />} />
