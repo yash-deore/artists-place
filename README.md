@@ -1,12 +1,14 @@
-### Demo Video:
+> ## Project made for HACKOFIESTA V3.0
+
+> ### Demo Video:
 
 https://youtu.be/QRPuK7iWrgg
 
-### Online Demo:
+> ### Online Demo:
 
 http://yash-deore.github.io/artists-place
 
-### Deployed addresses
+> ### Deployed addresses
 
 Polygon testnet: https://mumbai.polygonscan.com/address/0x0eC81f2A7538A9937d93B2E99E860260A4650dc6
 
