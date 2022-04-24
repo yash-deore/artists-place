@@ -16,8 +16,10 @@ export default function Home() {
   }, []);
 
   const loadNFTs = async () => {
-    /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.JsonRpcProvider();
+    // creating a provider for the frontend to query the unsold items
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://polygon-mumbai.g.alchemy.com/v2/_ZX6y7tqU8T5cuLhx3yjPA81SryETLcb"
+    );
     const contract = new ethers.Contract(
       marketplaceAddress,
       NFTMarketplace.abi,
@@ -87,7 +89,7 @@ export default function Home() {
                     <Card.Title>{nft.name}</Card.Title>
                     <Card.Text>{nft.description}</Card.Text>
                     <Card.Text>
-                      <b>{nft.price !== 0 ? nft.price + " ETH" : ""}</b>
+                      <b>{nft.price !== 0 ? nft.price + " MATIC" : ""}</b>
                     </Card.Text>
                     <Button onClick={() => buyNft(nft)}>Buy NFT</Button>
                   </Card.Body>

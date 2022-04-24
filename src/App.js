@@ -13,7 +13,7 @@ import {
 const App = () => {
   return (
     <div>
-      <Router>
+      <Router basename="/artists-place">
         {/* Navigation */}
         <Navigation />
 

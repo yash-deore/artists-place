@@ -1,84 +1,50 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Button, Card } from "react-bootstrap";
-import { create as ipfsHttpClient } from "ipfs-http-client";
+import { Container, Form, Button } from "react-bootstrap";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import NFTMarketplace from "../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json";
 import { marketplaceAddress } from "../marketPlace";
 
-const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
-
 const CreateNFT = () => {
-  const [assetName, setAssetName] = useState("");
-  const [assetDescription, setAssetDescription] = useState("");
   const [assetPrice, setAssetPrice] = useState(0);
   const [assetUri, setAssetUri] = useState("");
   const navigate = useNavigate();
 
-  const uploadToIPFS = async () => {
-    if (!assetName || !assetDescription || !assetPrice || !assetUri) return;
-
-    /* first, upload to IPFS */
-    const data = JSON.stringify({
-      name: assetName,
-      description: assetDescription,
-      image: assetUri,
-    });
-
-    try {
-      const added = await client.add(data);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      return url;
-    } catch (error) {
-      console.log("Error uploading file: ", error);
-    }
-  };
-
-  const uploadAsset = async (e) => {
-    const file = e.target.files[0];
-    try {
-      const added = await client.add(file, {
-        progress: (prog) => console.log(`received: ${prog}`),
-      });
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      setAssetUri(url);
-    } catch (error) {
-      console.log("Error uploading file: ", error);
-    }
-  };
-
-  const NFTDisplayCard = () => {
-    if (
-      assetName !== "" ||
-      assetDescription !== "" ||
-      assetPrice !== 0 ||
-      assetUri !== ""
-    ) {
-      return (
-        <Card style={{ width: "24rem" }}>
-          <Card.Img variant="top" src={assetUri} />
-          <Card.Body>
-            <Card.Title>{assetName}</Card.Title>
-            <Card.Text>{assetDescription}</Card.Text>
-            <Card.Text>
-              <b>{assetPrice !== 0 ? assetPrice + " ETH" : ""}</b>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      );
-    }
+  const renderMetadataDetails = () => {
+    return (
+      <div>
+        Your Metadata format should be in this{" "}
+        <a
+          href="https://bafybeihifud43qn7waaqyej4lsuxhlwmeltvlpa6cypiivftutfk4xgnpy.ipfs.infura-ipfs.io/format.txt"
+          target="_blank"
+          rel="noreferrer"
+        >
+          format
+        </a>{" "}
+        .
+        <br />
+        You can use services like{" "}
+        <a href="https://web3.storage/" target="_blank" rel="noreferrer">
+          web3.storage
+        </a>{" "}
+        or
+        <a href="https://www.pinata.cloud/" target="_blank" rel="noreferrer">
+          pinata.cloud
+        </a>{" "}
+        to upload the metadata and images.
+      </div>
+    );
   };
 
   const listNFTForSale = async (e) => {
     e.preventDefault();
-    const url = await uploadToIPFS();
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
 
-    /* next, create the item */
+    // creating the item
     const price = ethers.utils.parseUnits(assetPrice, "ether");
     let contract = new ethers.Contract(
       marketplaceAddress,
@@ -87,7 +53,7 @@ const CreateNFT = () => {
     );
     let listingPrice = await contract.getListingPrice();
     listingPrice = listingPrice.toString();
-    let transaction = await contract.createToken(url, price, {
+    let transaction = await contract.createToken(assetUri, price, {
       value: listingPrice,
     });
     await transaction.wait();
@@ -99,24 +65,15 @@ const CreateNFT = () => {
     <Container>
       <h2>Create NFT</h2>
 
+      {renderMetadataDetails()}
+
       <Form onSubmit={listNFTForSale}>
         <Form.Group className="mb-3">
-          <Form.Label>Asset Name :</Form.Label>
+          <Form.Label>Asset MetadataURL :</Form.Label>
           <Form.Control
-            onChange={(e) => setAssetName(e.target.value)}
+            onChange={(e) => setAssetUri(e.target.value)}
             type="text"
-            placeholder="Asset Name"
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Asset Description :</Form.Label>
-          <Form.Control
-            onChange={(e) => setAssetDescription(e.target.value)}
-            as="textarea"
-            rows={3}
-            placeholder="Asset Description"
+            placeholder="NFT Metadata"
             required
           />
         </Form.Group>
@@ -126,21 +83,11 @@ const CreateNFT = () => {
           <Form.Control
             onChange={(e) => setAssetPrice(e.target.value)}
             type="number"
-            placeholder="Asset Price"
+            step="0.000001"
+            placeholder="Asset Price in MATIC"
             required
           />
         </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Asset File :</Form.Label>
-          <Form.Control required onChange={uploadAsset} type="file" />
-          <Form.Text id="passwordHelpBlock" muted>
-            Use images of size: 1280 x 720
-          </Form.Text>
-        </Form.Group>
-
-        {NFTDisplayCard()}
-        <br />
 
         <Button type="submit">Create NFT</Button>
       </Form>

@@ -1,18 +1,14 @@
-# Basic Sample Hardhat Project
+## Deployed addresses
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Polygon testnet: https://mumbai.polygonscan.com/address/0x0eC81f2A7538A9937d93B2E99E860260A4650dc6
 
-Try running some of the following tasks:
+## Online Demo:
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+To be deployed
 
-use dotenv in hardhat.config.js
-start making the pages
+## Run on localhost:
+
+1. Clone the repository.
+2. Run `npm install`
+3. Run `npx hardhat node` and then deploy the smart contracts `npx hardhat run scripts/deploy.js --network localhost`
+4. Run `npm start` to run the project on http://localhost:3000/
