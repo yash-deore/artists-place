@@ -98,7 +98,7 @@ export default function CreatorDashboard() {
                 <Card.Img variant="top" src={nft.image} />
                 <Card.Body>
                   <Card.Text>
-                    <b>Price : {nft.price} ETH</b>
+                    <b>Price : {nft.price} MATIC</b>
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -122,7 +122,7 @@ export default function CreatorDashboard() {
                 <Card.Img variant="top" src={nft.image} />
                 <Card.Body>
                   <Card.Text>
-                    <b>Price : {nft.price} ETH</b>
+                    <b>Price : {nft.price} MATIC</b>
                   </Card.Text>
                 </Card.Body>
               </Card>
