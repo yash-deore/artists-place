@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/artists-place/static/css/main.e7720ab7.css",
-    "main.js": "/artists-place/static/js/main.9afd7346.js",
+    "main.js": "/artists-place/static/js/main.26b0a93c.js",
     "index.html": "/artists-place/index.html",
     "main.e7720ab7.css.map": "/artists-place/static/css/main.e7720ab7.css.map",
-    "main.9afd7346.js.map": "/artists-place/static/js/main.9afd7346.js.map"
+    "main.26b0a93c.js.map": "/artists-place/static/js/main.26b0a93c.js.map"
   },
   "entrypoints": [
     "static/css/main.e7720ab7.css",
-    "static/js/main.9afd7346.js"
+    "static/js/main.26b0a93c.js"
   ]
 }
