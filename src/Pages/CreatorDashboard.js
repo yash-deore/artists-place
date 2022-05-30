@@ -137,23 +137,6 @@ export default function CreatorDashboard() {
     <Container>
       <div>
         <br />
-        {/* <h2>Items You Listed :</h2>
-                <div>
-                    <CardGroup>
-                        {nfts.map((nft, i) => (
-                            <div key={i}>
-                                <Card style={{ width: "24rem" }}>
-                                    <Card.Img variant="top" src={nft.image} />
-                                    <Card.Body>
-                                        <Card.Text>
-                                            <b>Price : {nft.price} ETH</b>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </div>
-                        ))}
-                    </CardGroup>
-                </div> */}
 
         <Tabs defaultActiveKey="usernfts" className="mb-3">
           <Tab eventKey="usernfts" title="My Assets">
